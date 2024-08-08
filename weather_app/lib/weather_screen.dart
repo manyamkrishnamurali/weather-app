@@ -3,10 +3,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/additional_info.dart';
 //import 'package:weather_app/hourly_forecast.dart';
-import 'package:weather_app/secrets.dart';
+//import 'package:weather_app/secrets.dart';
 //import 'tiles.dart'; 
 import 'package:http/http.dart' as http;
 import 'package:weather_app/tiles.dart';
@@ -26,7 +27,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
    try{
     String cityName = 'Hyderabad';
     final res = await http.get(
-      Uri.parse('http://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=$APIKey'));
+      Uri.parse('${dotenv.env["ENDPOINT"]}?q=$cityName&APPID=${dotenv.env["APIKey"]}'));
   
     final data = jsonDecode(res.body);
 
